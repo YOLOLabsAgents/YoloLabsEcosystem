@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="400" height="400" alt="YOLO Labs AI" src="https://github.com/user-attachments/assets/02314c23-648e-4532-a004-79c0b6cb2e83" />
+  <img width="400" height="400" alt="YOLO Labs AI" src="https://github.com/YOLOLabsAgents/YoloLabsEcosystem/blob/main/yolo-removebg-preview.png" />
 </p>
 
 <h1 align="center">YOLO Labs AI</h1>
