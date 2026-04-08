@@ -1,0 +1,48 @@
+export interface ExperimentParameters {
+  tokenSymbol: string
+  analysisWindowMinutes: number
+  volatilityThreshold: number
+}
+
+export interface ExperimentResult {
+  averageVolatility: number
+  spikesDetected: number
+  finalScore: number
+  details?: Record<string, any>
+}
+
+export interface Experiment {
+  experimentId: string
+  createdAt: string
+  description: string
+  parameters: ExperimentParameters
+  status: "draft" | "running" | "completed" | "failed"
+  results: ExperimentResult | null
+  notes: string
+}
+
+export const createEmptyExperiment = (): Experiment => ({
+  experimentId: "",
+  createdAt: new Date().toISOString(),
+  description: "",
+  parameters: {
+    tokenSymbol: "",
+    analysisWindowMinutes: 0,
+    volatilityThreshold: 0,
+  },
+  status: "draft",
+  results: null,
+  notes: "",
+})
+
+export function updateExperimentStatus(
+  experiment: Experiment,
+  status: Experiment["status"],
+  notes?: string
+): Experiment {
+  return {
+    ...experiment,
+    status,
+    notes: notes ?? experiment.notes,
+  }
+}

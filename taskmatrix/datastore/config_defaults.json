@@ -1,0 +1,45 @@
+export interface LoggingConfig {
+  level: "debug" | "info" | "warn" | "error"
+  destinations: Array<"console" | "file" | "remote">
+  filePath?: string
+  remoteUrl?: string
+}
+
+export interface FeatureFlags {
+  enableDiagnostics: boolean
+  enableRealTimeAlerts: boolean
+  enableCache?: boolean
+  enableMetrics?: boolean
+}
+
+export interface ProjectConfig {
+  projectName: string
+  environment: "development" | "staging" | "production"
+  logging: LoggingConfig
+  features: FeatureFlags
+}
+
+export const DEFAULT_CONFIG: ProjectConfig = {
+  projectName: "LabCore",
+  environment: "development",
+  logging: {
+    level: "debug",
+    destinations: ["console", "file"],
+    filePath: "./logs/labcore.log",
+  },
+  features: {
+    enableDiagnostics: true,
+    enableRealTimeAlerts: false,
+    enableCache: true,
+    enableMetrics: true,
+  },
+}
+
+export function loadConfig(overrides?: Partial<ProjectConfig>): ProjectConfig {
+  return {
+    ...DEFAULT_CONFIG,
+    ...overrides,
+    logging: { ...DEFAULT_CONFIG.logging, ...overrides?.logging },
+    features: { ...DEFAULT_CONFIG.features, ...overrides?.features },
+  }
+}
